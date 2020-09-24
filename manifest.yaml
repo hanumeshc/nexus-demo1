@@ -27,7 +27,7 @@ spec:
         app: harbor-apache
     spec:
       containers:
-        - image: 'harbor.opsmx.com/hanuopsmx/httpd:v1'
+        - image: 'harbor.opsmx.com/opsmxtest/apache:v0.202009221623'
           name: harbor-apache
           ports:
             - containerPort: 80
