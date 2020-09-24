@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: harbor-apache
+spec:
+  ports:
+    - nodePort: 30044
+      port: 80
+      protocol: TCP
+      targetPort: 80
+  selector:
+    app: harbor-apache
+  type: NodePort
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: harbor-apache
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: harbor-apache
+  template:
+    metadata:
+      labels:
+        app: harbor-apache
+    spec:
+      containers:
+        - image: 'harbor.opsmx.com/hanuopsmx/httpd:v1'
+          name: harbor-apache
+          ports:
+            - containerPort: 80
